@@ -1,0 +1,103 @@
+Animating Vur Router Transitions.
+
+<section>
+    How Transition Element works
+    <div>
+        The transition element sets up different hooks and adds classes to your changing elements so that we can style
+        them through out the different state of trsnition
+
+        There are two main set of transition classes
+
+        1. The Enter classes
+        <div>
+            The classes are listed here
+
+            1. .v-enter-from
+            \This sets the start state of the transition and is removed once our transition starts
+
+            2. .v-enter-to
+            \This sets the end state of the transition
+
+            3. .v-enter-active
+            \This controls our transitions while its active
+        </div>
+
+
+        2. The leave classes
+        <div>
+            The classes are listed here
+
+            1. .v-leave-from
+            \This sets the start state of the transition and is removed once our transition starts
+
+            2. .v-leave-to
+            \This sets the end state of the transition
+
+            3. .v-leave-active
+            \This controls our transitions while its active
+        </div>
+
+
+        These classes are the default names for a transition element meaning if we dont name our transition as in if we
+        dont give our <transition name=""> transition name attribute a value its default will just be the (v)
+
+            But if you give it a name e.g <transition name="fade"> the classes will become
+                1. .fade-enter-from
+                2. .fade-enter-to
+                3. .fade-enter-active
+
+                1. .fade-leave-from
+                2. .fade-leave-to
+                3. .fade-leave-active
+
+    </div>
+
+    Modes
+    <div>
+        We have three types of Modes
+        1. Default Mode
+        \Where the two elements are transitioning at the same time (the elements that are leaving and the new element
+        that is coming in when you switch pages)
+
+        2. out-in Mode
+        \Where the new element fades in and the old element fades out (the elements that are leaving and the new element
+        that is coming in when you switch pages)
+
+        3. out-in Mode
+        \Where the old elements first will fade out and the the new element will fade in
+    </div>
+
+    CODE
+    <code>
+        <script setup>
+            import { RouterView, RouterLink } from "vue-router";
+        </script>
+            
+            <template>
+            
+                <nav>
+                    <RouterLink to="/">Home</RouterLink>
+                    <RouterLink to="/about">About</RouterLink>
+                </nav>
+            
+                <RouterView v-slot="{ Component }">
+                    <transition name="fade" mode="out-in">
+                        <component :is="Component" />
+                    </transition>
+                </RouterView>
+            
+            </template>
+            
+            <style>
+                .fade-enter-from,
+                .fade-leave-to {
+                    opacity: 0;
+                }
+            
+                .fade-enter-active,
+                .fade-leave-active {
+                    transition: opacity 0.5s ease-out;
+                }
+            </style>
+    </code>
+</section>
